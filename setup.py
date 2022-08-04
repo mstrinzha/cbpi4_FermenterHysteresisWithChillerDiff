@@ -5,7 +5,7 @@ setup(name='cbpi4_FermenterHysteresisWithChillerDiff',
       description='CraftBeerPi Plugin',
       author='Maxim Strinzha',
       author_email='mstrinzha@gmail.com',
-      url='',
+      url='https://github.com/mstrinzha/cbpi4_FermenterHysteresisWithChillerDiff',
       include_package_data=True,
       package_data={
         # If any package contains *.txt or *.rst files, include them:
