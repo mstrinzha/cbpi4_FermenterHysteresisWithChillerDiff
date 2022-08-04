@@ -31,7 +31,7 @@ class FermenterHysteresisWithChillerDiff(CBPiFermenterLogic):
             self.fermenter = self.get_fermenter(self.id)
             self.heater = self.fermenter.heater
             self.cooler = self.fermenter.cooler
-            self.chiller_temp = self.get_sensor_value(self.chillerSensorId)
+            self.chiller_temp = float(self.get_sensor_value(self.chillerSensorId).get("value"))
 
             heater = self.cbpi.actor.find_by_id(self.heater)
             cooler = self.cbpi.actor.find_by_id(self.cooler)
