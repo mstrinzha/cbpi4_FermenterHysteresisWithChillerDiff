@@ -31,7 +31,6 @@ class FermenterHysteresisWithChillerDiff(CBPiFermenterLogic):
             self.fermenter = self.get_fermenter(self.id)
             self.heater = self.fermenter.heater
             self.cooler = self.fermenter.cooler
-            self.chiller_temp = float(self.get_sensor_value(self.chillerSensorId).get("value"))
 
             heater = self.cbpi.actor.find_by_id(self.heater)
             cooler = self.cbpi.actor.find_by_id(self.cooler)
@@ -39,6 +38,7 @@ class FermenterHysteresisWithChillerDiff(CBPiFermenterLogic):
             while self.running == True:
 
                 sensor_value = float(self.get_sensor_value(self.fermenter.sensor).get("value"))
+                chiller_temp = float(self.get_sensor_value(self.chillerSensorId).get("value"))
                 target_temp = float(self.get_fermenter_target_temp(self.id))
 
                 try:
@@ -58,11 +58,11 @@ class FermenterHysteresisWithChillerDiff(CBPiFermenterLogic):
                     if self.heater and (heater_state == True):
                         await self.actor_off(self.heater)
 
-                if sensor_value >= self.cooler_offset_min + target_temp and self.chiller_temp <= target_temp - self.chiller_diff:
+                if sensor_value >= self.cooler_offset_min + target_temp and chiller_temp <= target_temp - self.chiller_diff:
                     if self.cooler and (cooler_state == False):
                         await self.actor_on(self.cooler)
 
-                if sensor_value <= self.cooler_offset_max + target_temp or self.chiller_temp > target_temp -  self.chiller_diff:
+                if sensor_value <= self.cooler_offset_max + target_temp or chiller_temp > target_temp - self.chiller_diff:
                     if self.cooler and (cooler_state == True):
                         await self.actor_off(self.cooler)
 
