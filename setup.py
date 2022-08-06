@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='cbpi4_FermenterHysteresisWithChillerDiff',
-      version='0.0.2',
+      version='0.0.3',
       description='CraftBeerPi Plugin',
       author='Maxim Strinzha',
       author_email='mstrinzha@gmail.com',
